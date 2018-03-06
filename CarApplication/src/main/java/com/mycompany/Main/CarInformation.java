@@ -24,4 +24,7 @@ public class CarInformation {
     public String toString(){
         return name+"\n"+"   Price: $"+price+"     Mileage: "+mileage+"km    Engine:" + engine+" cyclone\n";
     }
+    public String toString1(){
+        return name+","+price+","+mileage+","+engine;
+    }
 }

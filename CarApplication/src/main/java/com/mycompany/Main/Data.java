@@ -7,6 +7,8 @@ package com.mycompany.Main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -43,5 +45,16 @@ public class Data {
      }
      public void addList(CarInformation ci){
          cl.add(ci);
+     }
+     public void saveCarList() throws IOException{
+         String dummy = "";
+        for(CarInformation c : cl){
+//            if(s.getChecking()){s.setChecking(false);}
+           
+            dummy += c.toString1()+"\n";
+        }
+        FileWriter fw = new FileWriter(textFile);
+        fw.write(dummy);
+        fw.close();
      }
 }

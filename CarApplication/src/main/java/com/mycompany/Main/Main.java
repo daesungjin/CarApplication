@@ -25,8 +25,8 @@ import javax.swing.JTextField;
  * @author Samsung
  */
 public class Main extends JPanel{
-    private JButton search,last,next,clear,addInfo;
-   private JTextField banner,infodisplay,info,displayrecord,line1,line2, line3, line4;
+   private JButton search,last,next,clear,addInfo, button1, button2;
+   private JTextField banner,infodisplay,info,displayrecord,line1,line2, line3, line4,input;
    private JTextArea textArea;
    Data data;
    boolean sd=false;
@@ -47,7 +47,7 @@ public class Main extends JPanel{
         this.data = new Data();
         data.readInfo();
         
-     
+      
       
       banner = new JTextField(80);
       add(banner);
@@ -100,11 +100,26 @@ public class Main extends JPanel{
       line3.setEnabled(false);
       line3.setHorizontalAlignment(JTextField.CENTER);
       line3.setFont(new Font("Calibri", Font.BOLD, 22));
-      line3.setForeground(Color.green);
-      line3.setBackground(Color.black);
+      line3.setForeground(Color.black);
+      line3.setBackground(Color.white);
       line3.setBorder(javax.swing.BorderFactory.createEmptyBorder());
       line3.setOpaque(false);
       //entering info
+      
+      
+      input = new JTextField(80);
+      add(input);
+      input.setEditable(true);
+      input.setEnabled(false);
+      input.setHorizontalAlignment(JTextField.CENTER);
+      input.setFont(new Font("Calibri", Font.BOLD, 22));
+      input.setForeground(Color.white);
+      input.setBackground(Color.black);
+      input.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+      input.setOpaque(false);
+
+
+
       search = new JButton("Look up inventory"); 
       add(search);
       search.setFont(new Font("Plain", Font.BOLD, 16));
@@ -115,6 +130,12 @@ public class Main extends JPanel{
       last.setEnabled(false);
       last.setFont(new Font("Plain", Font.BOLD, 16));
       last.setOpaque(false);
+      
+      button1 = new JButton("CarInventory"); 
+      add(button1);
+      button1.setVisible(true);
+      button1.setFont(new Font("Plain", Font.BOLD, 16));
+      button1.setOpaque(false);
       
       next = new JButton("Next Page"); 
       add(next);
@@ -165,16 +186,26 @@ public class Main extends JPanel{
       textArea.setForeground(Color.cyan);
       textArea.setBackground(Color.black);
       textArea.setOpaque(false);
+      textArea.setEditable(false);
+      
+      button2 = new JButton("back"); 
+      add(button2);
+      button2.setVisible(false);
+      button2.setFont(new Font("Plain", Font.BOLD, 16));
+      button2.setOpaque(false);
       
       
-      
-     
+      search.setVisible(false);last.setVisible(false);next.setVisible(false);clear.setVisible(false);addInfo.setVisible(false);
+    banner.setVisible(false);infodisplay.setVisible(false);info.setVisible(false);displayrecord.setVisible(false);line1.setVisible(false);line2.setVisible(false); line3.setVisible(false);input.setVisible(false);
+    textArea.setVisible(false);
       DealerLookUpListener listener = new DealerLookUpListener();
       search.addActionListener(listener);
       last.addActionListener(listener);
       next.addActionListener(listener);
       clear.addActionListener(listener);
       addInfo.addActionListener(listener);
+      button1.addActionListener(listener);
+      button2.addActionListener(listener);
       }
      
       private class DealerLookUpListener implements ActionListener 
@@ -183,11 +214,27 @@ public class Main extends JPanel{
             {
            
             String s = "";
-            for(CarInformation ci : data.getCarList()){
-                s+=ci.toString();
-            }
+            String s1 ="";
+            if(data.readInfo().size()<7){
+                for (int i = 0; i < data.readInfo().size(); i++) {
+                    s += data.readInfo().get(i).toString();
+                }
+            }else{
+                for (int i = 0; i < 7; i++) {
+                    s += data.readInfo().get(i).toString();
+                }
+                    for(int i = 7; i<data.readInfo().size() ; i++){
+                        s1 +=  data.readInfo().get(i).toString();
+                    }
+                }
+            if(event.getSource()==button2){
+                search.setVisible(false);last.setVisible(false);next.setVisible(false);clear.setVisible(false);addInfo.setVisible(false);button1.setVisible(true);button2.setVisible(false);
+                banner.setVisible(false);infodisplay.setVisible(false);info.setVisible(false);displayrecord.setVisible(false);line1.setVisible(false);line2.setVisible(false); line3.setVisible(false);input.setVisible(false);
+                 textArea.setVisible(false);
+            }    
             if(event.getSource() == search)
             {
+                
             clear.setEnabled(true);  
             last.setEnabled(false);
             next.setEnabled(true);          
@@ -199,12 +246,16 @@ public class Main extends JPanel{
             textArea.setEditable(false);
             textArea.setHighlighter(null);
             }
-            
+            if(event.getSource() == button1){
+                search.setVisible(true);last.setVisible(true);next.setVisible(true);clear.setVisible(true);addInfo.setVisible(true);button1.setVisible(false);
+                banner.setVisible(true);infodisplay.setVisible(true);info.setVisible(true);displayrecord.setVisible(true);line1.setVisible(true);line2.setVisible(true); line3.setVisible(true); input.setVisible(true);
+                textArea.setVisible(true);button2.setVisible(true);
+            }
             if(event.getSource() == next)
             {
             next.setEnabled(false);
             last.setEnabled(true);
-            textArea.setText("");  
+            textArea.setText(s1);  
             textArea.setFont(new Font("Plain", Font.BOLD, 22));
             textArea.setOpaque(true);
             textArea.setEditable(false);
@@ -232,24 +283,43 @@ public class Main extends JPanel{
             last.setEnabled(false);
             next.setEnabled(false);
             clear.setEnabled(false);
+            
+            input.setText("");
             }
             if(event.getSource()== addInfo){
+            
+               line3.setOpaque(true);
+               line3.setForeground(Color.black);
+               line3.setBackground(Color.white);
                
+               
+               
+               line3.setText("Enter Make & model,price,mileage,engine below: " );
+               line3.setEditable(false);
+               
+               input.setOpaque(true);
+               input.setEnabled(true);
+                
                 if(sd){
-                String st = line3.getText();
+                String st = input.getText();
                 String[] property = new String[5];
                 if(st!=null){
                      property = st.split(",");
                  
                      CarInformation ci = new CarInformation(property[0],Integer.parseInt(property[1]), Integer.parseInt(property[2]), Integer.parseInt(property[3]));
                      data.addList(ci);
+                     
+                     input.setText("");
+                     
                 }
                 }
                  if(sd == false) {sd = true;} else{sd = false;}
                  line3.setEnabled(sd);
+                 
                 last.setEnabled(false);
                 next.setEnabled(false);
                 clear.setEnabled(true);
+                
                 
             }
            

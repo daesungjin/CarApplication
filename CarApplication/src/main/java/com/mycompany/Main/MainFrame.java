@@ -16,23 +16,22 @@ import javax.swing.JFrame;
  *
  * @author Samsung
  */
-public class MainFrame extends JFrame implements ActionListener{
+public class MainFrame extends JFrame{
     Main panel;
-     private JButton addInfo;
-     AddCarInfo ac = new AddCarInfo();
+     
+    
     public MainFrame() throws FileNotFoundException{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);      
       
       
       panel = new Main();
-      this.getContentPane().add(panel);
+      this.add(panel);
       this.pack();
       this.setSize(1000,850);
       this.setResizable(false);
       this.setVisible(true);
       this.setLocationRelativeTo(null);
-      panel.setBackground(Color.white);
-      add(ac);
+      
       
       
     }
@@ -43,15 +42,5 @@ public class MainFrame extends JFrame implements ActionListener{
       
    }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource()== panel.getAddInfo()){
-            
-            this.removeAll();
-            this.repaint();
-            this.validate();
-            this.add(ac);
-            
-        }
-    }
+   
 }
