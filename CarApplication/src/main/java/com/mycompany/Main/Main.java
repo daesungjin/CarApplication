@@ -26,7 +26,7 @@ import javax.swing.JTextField;
  */
 public class Main extends JPanel {
 
-    private JButton search, last, next, clear, addInfo, button1, button2;
+    private JButton search, last, next, clear, addInfo, button1, button2,button3;
     private JTextField banner, infodisplay, info, displayrecord, line1, line2, line3, line4, input;
     private JTextArea textArea;
     Data data;
@@ -184,8 +184,15 @@ public class Main extends JPanel {
         button2.setVisible(false);
         button2.setFont(new Font("Plain", Font.BOLD, 16));
         button2.setOpaque(false);
-
+        
+        button3 = new JButton("Planner");
+        add(button3);
+        
+        button3.setFont(new Font("Plain", Font.BOLD, 16));
+        button3.setOpaque(false);
+        
         setInventoryBoolean(false);
+        banner.setVisible(true);
         DealerLookUpListener listener = new DealerLookUpListener();
         search.addActionListener(listener);
         last.addActionListener(listener);
@@ -196,7 +203,28 @@ public class Main extends JPanel {
         button2.addActionListener(listener);
         
     }
-
+public void setInventoryBoolean(boolean b) {
+        search.setVisible(b);
+        last.setVisible(b);
+        next.setVisible(b);
+        clear.setVisible(b);
+        addInfo.setVisible(b);
+        
+        
+        infodisplay.setVisible(b);
+        info.setVisible(b);
+        displayrecord.setVisible(b);
+        line1.setVisible(b);
+        line2.setVisible(b);
+        line3.setVisible(b);
+        input.setVisible(b);
+        textArea.setVisible(b);
+        button2.setVisible(b);
+    }
+    public void setMainMenuBoolean(boolean b){
+        button1.setVisible(b);
+        button3.setVisible(b);
+    }
     private class DealerLookUpListener implements ActionListener {
 
         public void actionPerformed(ActionEvent event) {
@@ -217,6 +245,7 @@ public class Main extends JPanel {
             }
             if (event.getSource() == button2) {
                 setInventoryBoolean(false);
+                setMainMenuBoolean(true);
             }
             if (event.getSource() == search) {
 
@@ -233,6 +262,8 @@ public class Main extends JPanel {
             }
             if (event.getSource() == button1) {
                 setInventoryBoolean(true);
+                setMainMenuBoolean(false);
+                
             }
             if (event.getSource() == next) {
                 next.setEnabled(false);
@@ -279,10 +310,12 @@ public class Main extends JPanel {
                 input.setEnabled(true);
 
                 if (sd) {
+                    if(input.getText()==null) return;
                     String st = input.getText();
-                    String[] property = new String[5];
-                    if (st != null) {
-                        property = st.split(",");
+                    
+                    String[] property =st.split(",");
+                    if(property.length!=4) return;
+                    if (st != null) {                        
 
                         CarInformation ci = new CarInformation(property[0], Integer.parseInt(property[1]), Integer.parseInt(property[2]), Integer.parseInt(property[3]));
                         data.addList(ci);
@@ -308,25 +341,5 @@ public class Main extends JPanel {
 
     }
 
-    public void setInventoryBoolean(boolean b) {
-        search.setVisible(b);
-        last.setVisible(b);
-        next.setVisible(b);
-        clear.setVisible(b);
-        addInfo.setVisible(b);
-        
-        banner.setVisible(b);
-        infodisplay.setVisible(b);
-        info.setVisible(b);
-        displayrecord.setVisible(b);
-        line1.setVisible(b);
-        line2.setVisible(b);
-        line3.setVisible(b);
-        input.setVisible(b);
-        textArea.setVisible(b);
-    }
-    public void setMainMenuBoolean(boolean b){
-        button1.setVisible(b);
-        button2.setVisible(b);
-    }
+    
 }
