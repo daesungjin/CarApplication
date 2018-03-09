@@ -27,4 +27,16 @@ public class CarInformation {
     public String toString1(){
         return name+","+price+","+mileage+","+engine;
     }
+    public String getName(){
+        return name;
+    }
+    public int getPrice(){
+        return price;
+    }
+    public int geMileage(){
+        return mileage;
+    }
+    public int getEngine(){
+        return engine;
+    }
 }

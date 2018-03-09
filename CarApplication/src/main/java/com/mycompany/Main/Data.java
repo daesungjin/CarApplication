@@ -46,6 +46,19 @@ public class Data {
      public void addList(CarInformation ci){
          cl.add(ci);
      }
+     public ArrayList<CarInformation> sortMileage(){
+         ArrayList<CarInformation> list = cl;
+         for(int i = list.size()-1; i >= 0; i--) {
+        for(int j = 0; j < i; j++) {
+            if(list.get(j).geMileage() > list.get(j + 1).geMileage()) {
+                CarInformation temp = list.get(j);
+                list.set(j, list.get(j + 1));
+                list.set(j + 1, temp);
+            }
+        }
+    }
+      return list;
+     }
      public void saveCarList() throws IOException{
          String dummy = "";
         for(CarInformation c : cl){
