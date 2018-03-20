@@ -33,7 +33,7 @@ public class CarInformation {
     public int getPrice(){
         return price;
     }
-    public int geMileage(){
+    public int getMileage(){
         return mileage;
     }
     public int getEngine(){

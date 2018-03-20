@@ -47,7 +47,7 @@ public class Main extends JPanel {
 
     public Main() throws FileNotFoundException {
         this.data = new Data();
-        data.readInfo();
+        data.readCarInfo();
 
         banner = new JTextField(80);
         add(banner);
@@ -231,16 +231,16 @@ public void setInventoryBoolean(boolean b) {
 
             String s = "";
             String s1 = "";
-            if (data.readInfo().size() < 7) {
-                for (int i = 0; i < data.readInfo().size(); i++) {
-                    s += data.readInfo().get(i).toString();
+            if (data.readCarInfo().size() < 7) {
+                for (int i = 0; i < data.readCarInfo().size(); i++) {
+                    s += data.readCarInfo().get(i).toString();
                 }
             } else {
                 for (int i = 0; i < 7; i++) {
-                    s += data.readInfo().get(i).toString();
+                    s += data.readCarInfo().get(i).toString();
                 }
-                for (int i = 7; i < data.readInfo().size(); i++) {
-                    s1 += data.readInfo().get(i).toString();
+                for (int i = 7; i < data.readCarInfo().size(); i++) {
+                    s1 += data.readCarInfo().get(i).toString();
                 }
             }
             if (event.getSource() == button2) {
