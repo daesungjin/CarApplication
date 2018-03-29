@@ -29,8 +29,8 @@ public class Data {
     Scanner sc1, sc2;
     String [] property = new String[5];
     public Data() throws FileNotFoundException{
-        textFile = new File("carList.txt");
-        vinFile = new File("vinList.txt");
+        textFile = new File("C:\\Users\\Samsung\\Documents\\NetBeansProjects\\CarApplication\\src\\main\\resources\\carList.txt");
+        vinFile = new File("C:\\Users\\Samsung\\Documents\\NetBeansProjects\\CarApplication\\src\\main\\resources\\vinList.txt");
         if(textFile != null){
         sc1 = new Scanner(textFile);
         }
@@ -50,7 +50,12 @@ public class Data {
             }
             return cl;
     }
-     public ArrayList<CarInformation> getCarList(){
+    public ArrayList<CarInformation> addInfoByVin(String vin) throws Exception{
+        HashMap<String, String> hm = this.call_me(vin);
+        String make = hm.get("make");
+        return cl;
+    }
+    public ArrayList<CarInformation> getCarList(){
          return cl;
      }
      public void addList(CarInformation ci){
@@ -111,6 +116,7 @@ public class Data {
             response.append(inputLine);
         }
         in.close();
+        
         JSONObject myResponse = new JSONObject(response.toString());
         String s = (String) myResponse.get("Results").toString();
         JSONObject myResponse1 = new JSONObject(s.substring(1,s.length()));

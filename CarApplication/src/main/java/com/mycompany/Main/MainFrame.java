@@ -41,10 +41,11 @@ public class MainFrame extends JFrame{
       
     }
     public static void call_me() throws Exception{
-        String url = "https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvalues/1FMDU32X8PUB43553?format=json";
+        String url = "https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvalues/1HGCD5532VA869266?format=json";
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
+        
         con.setRequestProperty("User-Agent", "Mozilla/5.0");
         int reponseCode = con.getResponseCode();
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -69,9 +70,13 @@ public class MainFrame extends JFrame{
     public static void main(String[] args) throws FileNotFoundException, Exception
    {  
       Data d = new Data();
-      HashMap<String, String> hm = d.call_me("1HGCD5532VA869266");
-      for(String key : hm.keySet())
-       System.out.println(key+": "+hm.get(key));
+     
+      HashMap<String, String> hm = d.call_me("1FTKR1ED9APA75966");      
+       
+     for(String key : hm.keySet())          {
+       System.out.println(key+": "+hm.get(key));}
+       System.out.println(hm.size());
+       
    }
 
    
