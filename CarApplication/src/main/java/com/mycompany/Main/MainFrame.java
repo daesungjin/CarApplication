@@ -67,17 +67,17 @@ public class MainFrame extends JFrame{
             }}
         System.out.println(i);
     }
-    public static void main(String[] args) throws FileNotFoundException, Exception
-   {  
-      Data d = new Data();
-     
-      HashMap<String, String> hm = d.call_me("1FTKR1ED9APA75966");      
-       
-     for(String key : hm.keySet())          {
-       System.out.println(key+": "+hm.get(key));}
-       System.out.println(hm.size());
-       
-   }
+//    public static void main(String[] args) throws FileNotFoundException, Exception
+//   {  
+//      Data d = new Data();
+//     
+//      HashMap<String, String> hm = d.call_me("1FTKR1ED9APA75966");      
+//       
+//     for(String key : hm.keySet())          {
+//       System.out.println(key+": "+hm.get(key));}
+//       System.out.println(hm.size());
+//       
+//   }
 
    
 }
